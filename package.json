@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/jest",
-    "build": "./node_modules/.bin/webpack"
+    "build": "./node_modules/.bin/webpack",
+    "test:coverage": "npm t -- --silent --coverage"
   },
   "keywords": [],
   "author": "",
