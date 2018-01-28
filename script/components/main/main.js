@@ -15,8 +15,7 @@ class Main extends React.Component {
 
 		this.getISS = () => {
 			fetch('http://api.open-notify.org/iss-now.json')
-			.then(res => res.json())
-			.then(json => this.setState({ json }))
+			.then(res => this.setState({ json: res.json() }))
 			.catch(error => this.setState({ error }));
 		};
 	}
