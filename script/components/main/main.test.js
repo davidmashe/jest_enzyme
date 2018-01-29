@@ -8,6 +8,8 @@ import RefreshPanel from '../refresh_panel/refresh_panel.js';
 
 configure({ adapter: new Adapter() });
 
+// ONE ---
+
 const tautology = () => {
 	expect(1).toEqual(1);
 };
@@ -15,6 +17,8 @@ const tautology = () => {
 describe('tautology', () => {
 	test('can one possibly equal one?', tautology);
 });
+
+// TWO ---
 
 jest.mock('../coordinates_display/coordinates_display.js', () => {
 	return props => <div>Coordinates Display Mock</div>
@@ -28,7 +32,6 @@ jest.mock('../refresh_panel/refresh_panel.js', () => {
 	return props => <div onClick={props.onChange}>Refresh Panel Mock</div>
 });	
 
-// global.fetch = jest.fn(() => Promise.resolve());
 global.fetch = jest.fn();
 
 const testClick = () => {
@@ -43,17 +46,26 @@ const testClick = () => {
 	expect(fetch).toHaveBeenCalledTimes(1);	
 };
 
+// THREE ---
+
 describe('components/main', () => {
 	test('full render suceeds, and responds to a click', testClick);
 });
 
-const testInvalidProps = () => {
+const testJsonInState = () => {
+	const modelJson = { 
+		'iss_position': {
+			latitude: '20',
+			longitude: '20'
+		} 
+	};
+
 	const wrapper = mount(<Main />);
-	wrapper.setState({ error: '', json: { 'key': 'test' } });
+	wrapper.setState({ error: '', json: modelJson });
 	console.log(wrapper.state());
 	expect(wrapper.length).toEqual(1);
 };
 
 describe('components/main part two', () => {
-	test('main handles invalid props', testInvalidProps);
+	test('main handles valid json', testJsonInState);
 });
